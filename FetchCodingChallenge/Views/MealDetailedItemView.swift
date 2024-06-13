@@ -22,7 +22,6 @@ struct MealDetailedItemView: View {
             .listStyle(PlainListStyle())
             .task {
                 do{
-                    print(mealId)
                     try await detailedViewModel.getMealDetails(forMealId: mealId)
                     
                 }catch {
@@ -34,7 +33,7 @@ struct MealDetailedItemView: View {
 }
 
 #Preview {
-    MealDetailedItemView(mealId: "52767")
+    MealDetailedItemView(mealId: "53049")
 }
 
 struct MealCard: View {
@@ -43,7 +42,7 @@ struct MealCard: View {
         
         VStack {
             
-            AsyncImage(url: URL(string:mealDetails.strMealThumb), content : {image in
+            AsyncImage(url: URL(string:mealDetails.strMealThumb!), content : {image in
                 image.resizable()
                     .scaledToFit()
                     .frame(height:UIScreen.main.bounds.height/2)
@@ -63,7 +62,7 @@ struct MealCard: View {
             HStack{
                 Text("Category")
                 Spacer()
-                Text(mealDetails.strCategory)
+                Text(mealDetails.strCategory ?? "")
                     .fontWeight(.semibold)
                 
             }
@@ -75,7 +74,7 @@ struct MealCard: View {
             HStack{
                 Text("Area")
                 Spacer()
-                Text(mealDetails.strArea!)
+                Text(mealDetails.strArea ?? "")
                     .fontWeight(.semibold)
                 
             }
@@ -86,7 +85,7 @@ struct MealCard: View {
             HStack{
                 Text("Tags")
                 Spacer()
-                Text(mealDetails.strTags!)
+                Text(mealDetails.strTags ?? " ")
                     .fontWeight(.semibold)
                     .lineLimit(2)
                     .minimumScaleFactor(0.5)
@@ -104,22 +103,23 @@ struct MealCard: View {
                     Spacer()
                     
                 }
-                .overlay(VStack{
-                    Divider().offset(x:0,y: 15)
-                })
-                .padding()
+                
             })
-            HStack{
-                Text("Ingridients")
-                Spacer()
-                Text("Tap to Open")
-                    .fontWeight(.light)
-                    .font(.caption2)
-            }
             .overlay(VStack{
                 Divider().offset(x:0,y: 15)
             })
             .padding()
+            NavigationLink(destination: InstructionsView(), label:  {
+                HStack{
+                    Text("Ingridients")
+                    Spacer()
+                    
+                }
+                
+            }).overlay(VStack{
+                Divider().offset(x:0,y: 15)
+            })
+        .padding()
             
             //                }
             //                .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
@@ -127,7 +127,6 @@ struct MealCard: View {
             //                .padding(.trailing)
             
         }
-        .padding()
         
     }
 }

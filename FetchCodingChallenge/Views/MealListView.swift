@@ -14,7 +14,7 @@ struct MealListView: View {
         NavigationView {
             List(mealListItemViewModel.mealListItems, id: \.id){
                 item in
-                MealListItemView(item: item)
+                NavigationLink(destination: MealDetailedItemView(mealId: item.idMeal), label: {MealListItemView(item: item)})
                     .listRowSeparator(.hidden)
             }
             .navigationTitle("Desserts")

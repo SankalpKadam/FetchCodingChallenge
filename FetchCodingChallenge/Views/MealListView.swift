@@ -22,11 +22,13 @@ struct MealListView: View {
             .listStyle(PlainListStyle())
             
         }
-        .onAppear(
-            perform: {
-                mealListItemViewModel.getMeals()
+        .task {
+            do {
+                try await mealListItemViewModel.getMeals()
+            }catch {
+                print("new error")
             }
-        )
+        }
         
     }
 }

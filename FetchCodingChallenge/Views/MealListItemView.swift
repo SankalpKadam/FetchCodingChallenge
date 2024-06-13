@@ -12,10 +12,10 @@ struct MealListItemView: View {
     var body: some View {
         HStack{
             
-            AsyncImage(url: URL(string:item.itemImage), content : {image in
+            AsyncImage(url: URL(string:item.strMealThumb), content : {image in
                 image.resizable()
                     .scaledToFit()
-                    .frame(height:200)
+                    .frame(width:200,height:200)
                     .cornerRadius(4)
                 
             },placeholder: {
@@ -28,7 +28,7 @@ struct MealListItemView: View {
             })
             .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
             VStack (alignment:.leading) {
-                Text(item.itemTitle)
+                Text(item.strMeal)
                     .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     .lineLimit(/*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
@@ -54,5 +54,5 @@ struct MealListItemView: View {
 }
 
 #Preview {
-    MealListItemView(item: MealListItem(id: "53049", itemTitle: "Apam Balik", itemImage: "https://www.themealdb.com/images/media/meals/adxcbq1619787919.jpg"))
+    MealListItemView(item: MealListItem(idMeal: "53049", strMeal: "Apam Balik", strMealThumb: "https://www.themealdb.com/images/media/meals/adxcbq1619787919.jpg"))
 }

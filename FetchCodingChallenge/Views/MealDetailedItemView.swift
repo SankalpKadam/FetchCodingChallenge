@@ -8,9 +8,42 @@
 import SwiftUI
 
 struct MealDetailedItemView: View {
+    var mealId: String
+    @StateObject var detailedViewModel: MealDetailedViewModel = MealDetailedViewModel()
+    
+    
     var body: some View {
+        NavigationView {
+            List (detailedViewModel.detailedMeal){
+                item in
+                MealCard(mealDetails: item)
+            }
+            .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, maxHeight: .infinity)
+            .listStyle(PlainListStyle())
+            .task {
+                do{
+                    print(mealId)
+                    try await detailedViewModel.getMealDetails(forMealId: mealId)
+                    
+                }catch {
+                    print("some error")
+                }
+            }
+        }
+    }
+}
+
+#Preview {
+    MealDetailedItemView(mealId: "52767")
+}
+
+struct MealCard: View {
+    var mealDetails: MealDetailedView
+    var body: some View {
+        
         VStack {
-            AsyncImage(url: URL(string:"https://www.themealdb.com/images/media/meals/wyrqqq1468233628.jpg"), content : {image in
+            
+            AsyncImage(url: URL(string:mealDetails.strMealThumb), content : {image in
                 image.resizable()
                     .scaledToFit()
                     .frame(height:UIScreen.main.bounds.height/2)
@@ -20,58 +53,88 @@ struct MealDetailedItemView: View {
                 Image("placeholder")
                     .resizable()
                     .scaledToFit()
-                    .frame(height: 200)
+                    .frame(height: UIScreen.main.bounds.height/2)
                     .cornerRadius(4)
                     .opacity(0.4)
             })
             .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
+            
+            //                List {
+            HStack{
+                Text("Category")
+                Spacer()
+                Text(mealDetails.strCategory)
+                    .fontWeight(.semibold)
                 
-                List {
-                    HStack{
-                        Text("Category")
-                        Spacer()
-                        Text("Dessert")
-                            .fontWeight(.semibold)
-                        
-                    }
-                    HStack{
-                        Text("Area")
-                        Spacer()
-                        Text("British")
-                            .fontWeight(.semibold)
-                        
-                    }
-                    HStack{
-                        Text("Tags")
-                        Spacer()
-                        Text("Tart, Alcoholic")
-                            .fontWeight(.semibold)
-                            .lineLimit(2)
-                            .minimumScaleFactor(0.5)
-                        
-                    }
-                    HStack{
-                        Text("Instructions")
-                        Spacer()
-                        Text(">")
-                        
-                    }
-                    HStack{
-                        Text("Ingridients")
-                        Spacer()
-                        Text(">")
-                    }
+            }
+            
+            .overlay(VStack{
+                Divider().offset(x:0,y: 15)
+            })
+            .padding()
+            HStack{
+                Text("Area")
+                Spacer()
+                Text(mealDetails.strArea!)
+                    .fontWeight(.semibold)
+                
+            }
+            .overlay(VStack{
+                Divider().offset(x:0,y: 15)
+            })
+            .padding()
+            HStack{
+                Text("Tags")
+                Spacer()
+                Text(mealDetails.strTags!)
+                    .fontWeight(.semibold)
+                    .lineLimit(2)
+                    .minimumScaleFactor(0.5)
+                
+            }
+            .overlay(VStack{
+                Divider().offset(x:0,y: 15)
+            })
+            .padding()
+            
+            NavigationLink(destination: InstructionsView(), label:
+                            {
+                HStack{
+                    Text("Instructions")
+                    Spacer()
+                    
                 }
-                .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
-                .listStyle(PlainListStyle())
-                .padding(.trailing)
+                .overlay(VStack{
+                    Divider().offset(x:0,y: 15)
+                })
+                .padding()
+            })
+            HStack{
+                Text("Ingridients")
+                Spacer()
+                Text("Tap to Open")
+                    .fontWeight(.light)
+                    .font(.caption2)
+            }
+            .overlay(VStack{
+                Divider().offset(x:0,y: 15)
+            })
+            .padding()
+            
+            //                }
+            //                .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
+            //                .listStyle(PlainListStyle())
+            //                .padding(.trailing)
             
         }
-            .padding()
+        .padding()
         
     }
 }
 
-#Preview {
-    MealDetailedItemView()
+
+struct InstructionsView:View {
+    var body: some View {
+        Text ("Hello")
+    }
 }

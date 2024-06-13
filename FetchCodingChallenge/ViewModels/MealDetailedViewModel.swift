@@ -9,6 +9,7 @@ import Foundation
 
 final class MealDetailedViewModel: ObservableObject {
     @Published var detailedMeal:[MealDetailedView] = []
+    
     func getMealDetails(forMealId mealId:String) async throws {
         let endpoint = "https://themealdb.com/api/json/v1/1/lookup.php?i=\(mealId)"
         
@@ -26,10 +27,11 @@ final class MealDetailedViewModel: ObservableObject {
         }
         
         do{
+            
             let decoder = JSONDecoder()
             let moddedResponse = try decoder.decode(DetailedMeal.self, from: data)
             detailedMeal = moddedResponse.meals
-            print(detailedMeal[0])
+            print(detailedMeal)
             return
 //            checkIfPropertyExists(moddedResponse:moddedResponse.meals[0])
         }catch{

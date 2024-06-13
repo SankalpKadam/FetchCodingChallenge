@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+struct MealListItem: Identifiable{
+    
+    let id:String
+    let itemTitle: String
+    let itemImage:String
+    
+}

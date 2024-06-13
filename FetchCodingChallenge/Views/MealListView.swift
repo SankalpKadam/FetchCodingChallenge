@@ -7,12 +7,14 @@
 
 import SwiftUI
 
-struct MealList: View {
+struct MealListView: View {
+    @StateObject var mealListItemViewModel = MealListItemViewModel()
+    
     var body: some View {
         NavigationView {
-            List(0..<10){
+            List(mealListItemViewModel.mealListItems, id: \.id){
                 item in
-                MealListItem()
+                MealListItemView(item: item)
                     .listRowSeparator(.hidden)
             }
             .navigationTitle("Desserts")
@@ -20,10 +22,15 @@ struct MealList: View {
             .listStyle(PlainListStyle())
             
         }
+        .onAppear(
+            perform: {
+                mealListItemViewModel.getMeals()
+            }
+        )
         
     }
 }
 
 #Preview {
-    MealList()
+    MealListView()
 }

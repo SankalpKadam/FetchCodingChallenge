@@ -7,11 +7,12 @@
 
 import SwiftUI
 
-struct MealListItem: View {
+struct MealListItemView: View {
+    let item:MealListItem
     var body: some View {
         HStack{
             
-            AsyncImage(url: URL(string:"https://www.themealdb.com/images/media/meals/adxcbq1619787919.jpg"), content : {image in
+            AsyncImage(url: URL(string:item.itemImage), content : {image in
                 image.resizable()
                     .scaledToFit()
                     .frame(height:200)
@@ -27,13 +28,13 @@ struct MealListItem: View {
             })
             .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
             VStack (alignment:.leading) {
-                Text("Adba Malik")
+                Text(item.itemTitle)
                     .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     .lineLimit(/*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
                     .minimumScaleFactor(0.5)
                 
-                Text("Dessert")
+                Text(item.id)
                     .font(.subheadline)
                     .foregroundColor(.secondary)
             }
@@ -53,5 +54,5 @@ struct MealListItem: View {
 }
 
 #Preview {
-    MealListItem()
+    MealListItemView(item: MealListItem(id: "53049", itemTitle: "Apam Balik", itemImage: "https://www.themealdb.com/images/media/meals/adxcbq1619787919.jpg"))
 }

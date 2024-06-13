@@ -5,17 +5,16 @@
 //  Created by Sankalp Kadam on 6/11/24.
 //
 
+
+
+// Entry point view for the iOS App
 import SwiftUI
 
 struct MainView: View {
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
+            MealListView()
+        }.edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
     }
 }
 

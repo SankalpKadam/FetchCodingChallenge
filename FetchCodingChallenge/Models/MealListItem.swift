@@ -7,6 +7,7 @@
 
 import Foundation
 
+// Struct to store the properties of each meal
 struct MealListItem: Identifiable, Codable{
     
     var id:String {idMeal}
@@ -15,6 +16,9 @@ struct MealListItem: Identifiable, Codable{
     let strMealThumb:String
     
 }
+
+// Struct to decode the meals list from the API
 struct Meals: Codable {
+    
     let meals: [MealListItem]
 }

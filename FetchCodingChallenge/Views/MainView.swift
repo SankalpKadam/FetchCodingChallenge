@@ -13,6 +13,7 @@ import SwiftUI
 struct MainView: View {
     var body: some View {
         VStack {
+//            MealDetailedView()
             MealListView()
         }.edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
     }

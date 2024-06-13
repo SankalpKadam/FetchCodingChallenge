@@ -11,6 +11,7 @@ final class MealListItemViewModel : ObservableObject {
     
     @Published var mealListItems : [MealListItem] = []
     
+    // This function makes a request to the API endpoint and stores fills the mealListItems array with the response received from the API
     func getMeals() async throws{
         let endpoint = "https://themealdb.com/api/json/v1/1/filter.php?c=Dessert"
         

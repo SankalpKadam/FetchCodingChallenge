@@ -7,10 +7,14 @@
 
 import Foundation
 
-struct MealListItem: Identifiable{
+struct MealListItem: Identifiable, Codable{
     
-    let id:String
-    let itemTitle: String
-    let itemImage:String
+    var id:String {idMeal}
+    let idMeal: String
+    let strMeal: String
+    let strMealThumb:String
     
+}
+struct Meals: Codable {
+    let meals: [MealListItem]
 }

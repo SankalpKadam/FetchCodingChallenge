@@ -9,14 +9,33 @@ import Foundation
 
 final class MealListItemViewModel : ObservableObject {
     
-    @Published var mealListItems : [MealListItem] = [MealListItem(id: "53409", itemTitle: "Apam Balik", itemImage: "https://www.themealdb.com/images/media/meals/adxcbq1619787919.jpg")]
+    @Published var mealListItems : [MealListItem] = []
     
-    func getMeals(){
-        mealListItems.append(MealListItem(id: "53407", itemTitle: "Apam Balik", itemImage: "https://www.themealdb.com/images/media/meals/adxcbq1619787919.jpg"))
+    func getMeals() async throws{
+        let endpoint = "https://themealdb.com/api/json/v1/1/filter.php?c=Dessert"
         
-            mealListItems.append(MealListItem(id: "3409", itemTitle: "Apam Balik", itemImage: "https://www.themealdb.com/images/media/meals/adxcbq1619787919.jpg"))
+        guard let url = URL(string: endpoint) else {
+            throw APIErrors.errorInURL
+        }
+        let (data, response) = try await URLSession.shared.data(from: url)
         
-            mealListItems.append(MealListItem(id: "409", itemTitle: "Apam Balik", itemImage: "https://www.themealdb.com/images/media/meals/adxcbq1619787919.jpg"))
+        guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+            throw APIErrors.errorInResponse
+        }
+        do{
+            let decoder = JSONDecoder()
+            let moddedResponse = try decoder.decode(Meals.self, from:data)
+            mealListItems = moddedResponse.meals
+        }catch {
+            throw APIErrors.errorInData
+        }
+        
     }
     
+}
+
+enum APIErrors: Error{
+    case errorInURL
+    case errorInResponse
+    case errorInData
 }

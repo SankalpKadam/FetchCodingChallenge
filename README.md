@@ -27,4 +27,7 @@ This is my solution for the coding challenge.
 ### UI Screenshots
 
 ![alt text](https://github.com/SankalpKadam/FetchCodingChallenge/blob/main/Images/Home%20Screen.png)
+![alt text](https://github.com/SankalpKadam/FetchCodingChallenge/blob/main/Images/Detail%20Screen.png)
+![alt text](https://github.com/SankalpKadam/FetchCodingChallenge/blob/main/Images/Instructions%20Screen.png)
+![alt text](https://github.com/SankalpKadam/FetchCodingChallenge/blob/main/Images/Ingredients%20Screen.png)
 

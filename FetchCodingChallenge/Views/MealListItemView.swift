@@ -34,19 +34,10 @@ struct MealListItemView: View {
                     .lineLimit(/*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
                     .minimumScaleFactor(0.5)
                 
-                Text(item.id)
+                Text("Dessert")
                     .font(.subheadline)
                     .foregroundColor(.secondary)
             }
-//            VStack {
-//                Text("Hello")
-//                    .bold()
-//                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-//                    
-//            }
-//            .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
-//            .background(.white)
-//            .opacity(0.8)
             
             
         }

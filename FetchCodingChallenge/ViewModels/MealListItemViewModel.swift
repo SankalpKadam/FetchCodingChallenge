@@ -19,10 +19,11 @@ final class MealListItemViewModel : ObservableObject {
             throw APIErrors.errorInURL
         }
         let (data, response) = try await URLSession.shared.data(from: url)
-        
+        // Checking if response is Ok
         guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
             throw APIErrors.errorInResponse
         }
+        // Deconding to store the JSON response in the form of respective model
         do{
             let decoder = JSONDecoder()
             let moddedResponse = try decoder.decode(Meals.self, from:data)

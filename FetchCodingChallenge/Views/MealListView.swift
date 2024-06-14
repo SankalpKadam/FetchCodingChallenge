@@ -11,6 +11,8 @@ struct MealListView: View {
     @StateObject var mealListItemViewModel = MealListItemViewModel()
     
     var body: some View {
+        
+        // Creating a navigation view to display the list of items
         NavigationView {
             List(mealListItemViewModel.mealListItems, id: \.id){
                 item in
@@ -24,6 +26,7 @@ struct MealListView: View {
         }
         .task {
             do {
+                // fetching all the meals
                 try await mealListItemViewModel.getMeals()
             }catch {
                 print("new error")

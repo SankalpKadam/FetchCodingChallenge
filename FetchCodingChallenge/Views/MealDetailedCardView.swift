@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// Diplays the meal details by using the data fetched by the respective view model
+    // Diplays the meal details by using the data fetched by the respective view model
 struct MealDetailedCardView: View {
     var mealDetails: MealDetailedView
     var modelObject: MealDetailedViewModel
@@ -18,8 +18,6 @@ struct MealDetailedCardView: View {
             VStack {
                 Text(mealDetails.strMeal ?? "")
                     .font(.headline)
-                
-                
                 AsyncImage(url: URL(string:mealDetails.strMealThumb ?? ""), content : {image in
                     image.resizable()
                         .scaledToFit()
@@ -49,8 +47,6 @@ struct MealDetailedCardView: View {
                     Divider().offset(x:0,y: 15)
                 })
                 .padding()
-                
-                
                 HStack{
                     Text("Area")
                     Spacer()
@@ -62,8 +58,6 @@ struct MealDetailedCardView: View {
                     Divider().offset(x:0,y: 15)
                 })
                 .padding()
-                
-                
                 HStack{
                     Text("Tags")
                     Spacer()
@@ -78,7 +72,6 @@ struct MealDetailedCardView: View {
                 })
                 .padding()
                 
-                
                 NavigationLink(destination: InstructionsView(detailedInstructions: mealDetails.strInstructions ?? "", modelObject: modelObject), label:
                                 {
                     HStack{
@@ -92,8 +85,6 @@ struct MealDetailedCardView: View {
                     Divider().offset(x:0,y: 15)
                 })
                 .padding()
-                
-                
                 NavigationLink(destination: IngredientsView(detailedMeal: mealDetails, modelObject: modelObject), label:  {
                     HStack{
                         Text("Ingridients")
@@ -111,7 +102,6 @@ struct MealDetailedCardView: View {
         }
     }
 }
-
 
 #Preview {
     MealDetailedCardView(mealDetails: MealDetailedView(idMeal: "1"), modelObject: MealDetailedViewModel())

@@ -26,7 +26,7 @@ final class MealListItemViewModel : ObservableObject {
         do{
             let decoder = JSONDecoder()
             let moddedResponse = try decoder.decode(Meals.self, from:data)
-            mealListItems = moddedResponse.meals
+            mealListItems = moddedResponse.meals.sorted{$0.strMeal < $1.strMeal}
         }catch {
             throw APIErrors.errorInData
         }

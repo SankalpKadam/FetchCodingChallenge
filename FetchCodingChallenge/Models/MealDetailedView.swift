@@ -8,6 +8,7 @@
 import Foundation
 
 struct MealDetailedView: Identifiable, Codable {
+    //Storing values for all properties in JSOn. Making it optional so that it can take nil as value as well.
     var id: String {idMeal}
     var idMeal: String
     var strMeal: String?
@@ -66,9 +67,6 @@ struct MealDetailedView: Identifiable, Codable {
 }
 
 struct DetailedMeal: Codable {
+    //Just for proporly decoding the JSON response.
     let meals: [MealDetailedView]
-}
-
-struct Ingredients {
-    var ingredients:[String]
 }
